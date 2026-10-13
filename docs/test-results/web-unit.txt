@@ -1,0 +1,10 @@
+
+ RUN  v3.2.4 /home/claude/aawen/web
+
+ ✓ src/lib/drafts.test.ts (4 tests) 32ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  11:13:24
+   Duration  1.08s (transform 109ms, setup 87ms, collect 111ms, tests 32ms, environment 481ms, prepare 87ms)
+

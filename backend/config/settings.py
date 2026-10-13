@@ -81,7 +81,8 @@ TEMPLATES = [{
     ]},
 }]
 
-DATABASES = {"default": env.db("DATABASE_URL", default="postgis://aawen:devpass@localhost:5432/aawen")}
+DATABASES = {"default": env.db("DATABASE_URL") if IS_PRODUCTION
+             else env.db("DATABASE_URL", default="postgis://aawen:devpass@localhost:5432/aawen")}
 DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"
 DATABASES["default"]["ATOMIC_REQUESTS"] = False
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("DB_CONN_MAX_AGE", default=60)

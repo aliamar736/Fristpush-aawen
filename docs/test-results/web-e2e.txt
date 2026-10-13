@@ -1,0 +1,30 @@
+
+Running 24 tests using 2 workers
+
+  ✓   2 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: / (2.1s)
+  ✓   1 e2e/finance-field.spec.ts:5:1 › pledge → simulated payment with duplicate webhooks → counted once (3.7s)
+  ✓   3 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /map (2.5s)
+  ✓   5 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /report/new (2.5s)
+  ✓   4 e2e/finance-field.spec.ts:28:1 › field worker attaches completion proof; resident independently verifies (5.7s)
+  ✓   6 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /aawen (2.2s)
+  ✓   8 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /aawen?tab=store (2.0s)
+  ✓   7 e2e/report-flow.spec.ts:23:1 › citizen submits a report through the wizard and lands on its tracking page (2.3s)
+  ✓   9 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /contribute (2.2s)
+  ✓  11 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /login (1.7s)
+  ✓  10 e2e/report-flow.spec.ts:37:1 › report written offline is queued, then sent exactly once when the connection returns (4.5s)
+  ✓  13 e2e/report-flow.spec.ts:55:1 › a resident confirms an existing nearby report instead of filing a duplicate (2.5s)
+  -  14 e2e/screenshots.spec.ts:9:1 › mobile citizen screens
+  -  15 e2e/screenshots.spec.ts:33:1 › desktop consoles
+  ✓  12 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /reports/1 (3.3s)
+  ✓  17 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /proposals (2.0s)
+  ✓  18 e2e/a11y-rtl.spec.ts:9:3 › no serious accessibility violations: /initiatives/1 (2.4s)
+  ✓  16 e2e/staff.spec.ts:7:1 › reviewer verifies and refers a report; agency acknowledges separately (6.8s)
+  ✓  20 e2e/staff.spec.ts:35:1 › a citizen cannot open the staff console (1.8s)
+  ✓  19 e2e/a11y-rtl.spec.ts:18:1 › staff console passes accessibility checks (9.5s)
+  ✓  21 e2e/a11y-rtl.spec.ts:30:1 › Arabic RTL by default, English switch flips direction (503ms)
+  ✓  22 e2e/a11y-rtl.spec.ts:42:1 › five tabs and the report button are reachable by keyboard (457ms)
+  ✓  23 e2e/a11y-rtl.spec.ts:50:1 › large text (200%) on a small phone does not cause horizontal scrolling (780ms)
+  ✓  24 e2e/a11y-rtl.spec.ts:59:1 › error, empty and offline states (1.9s)
+
+  2 skipped
+  22 passed (38.3s)

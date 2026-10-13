@@ -1,0 +1,156 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.16, pytest-8.4.2, pluggy-1.6.0
+django: version: 5.2.7, settings: config.settings (from ini)
+rootdir: /home/claude/aawen/backend
+configfile: pytest.ini
+testpaths: tests
+plugins: cov-7.0.0, django-4.11.1
+collected 62 items
+
+tests/test_accounts_ops.py ........                                      [ 12%]
+tests/test_finance.py ...........                                        [ 30%]
+tests/test_inventory_community.py ...........                            [ 48%]
+tests/test_offline_and_privacy.py .....                                  [ 56%]
+tests/test_report_lifecycle.py .........                                 [ 70%]
+tests/test_roadnow.py .......                                            [ 82%]
+tests/test_routing_permissions.py ........                               [ 95%]
+tests/test_accounts_ops.py .                                             [ 96%]
+tests/test_inventory_community.py .                                      [ 98%]
+tests/test_offline_and_privacy.py .                                      [100%]
+
+-- generated xml file: /home/claude/aawen/docs/test-results/backend-junit.xml --
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.13.16-final-0 _______________
+
+Name                                                                                           Stmts   Miss  Cover
+------------------------------------------------------------------------------------------------------------------
+apps/__init__.py                                                                                   0      0   100%
+apps/accounts/__init__.py                                                                          0      0   100%
+apps/accounts/apps.py                                                                              4      0   100%
+apps/accounts/migrations/0001_initial.py                                                           9      0   100%
+apps/accounts/migrations/0002_initial.py                                                           7      0   100%
+apps/accounts/migrations/__init__.py                                                               0      0   100%
+apps/accounts/models.py                                                                          122     11    91%
+apps/accounts/permissions.py                                                                      49      3    94%
+apps/accounts/services.py                                                                         82      5    94%
+apps/accounts/tasks.py                                                                             5      5     0%
+apps/accounts/tests/__init__.py                                                                    0      0   100%
+apps/accounts/views.py                                                                           193     72    63%
+apps/agencies/__init__.py                                                                          0      0   100%
+apps/agencies/apps.py                                                                              4      0   100%
+apps/agencies/migrations/0001_initial.py                                                           8      0   100%
+apps/agencies/migrations/0002_initial.py                                                           7      0   100%
+apps/agencies/migrations/0003_alter_agency_options_and_more.py                                     4      0   100%
+apps/agencies/migrations/__init__.py                                                               0      0   100%
+apps/agencies/models.py                                                                           51      1    98%
+apps/agencies/tests/__init__.py                                                                    0      0   100%
+apps/agencies/views.py                                                                            99     34    66%
+apps/ai/__init__.py                                                                                0      0   100%
+apps/ai/apps.py                                                                                    4      0   100%
+apps/ai/migrations/0001_initial.py                                                                 7      0   100%
+apps/ai/migrations/__init__.py                                                                     0      0   100%
+apps/ai/models.py                                                                                 10      0   100%
+apps/ai/services.py                                                                              104     39    62%
+apps/ai/tests/__init__.py                                                                          0      0   100%
+apps/community/__init__.py                                                                         0      0   100%
+apps/community/apps.py                                                                             4      0   100%
+apps/community/migrations/0001_initial.py                                                          8      0   100%
+apps/community/migrations/0002_alter_budgetcycle_options_alter_carepoint_options_and_more.py       4      0   100%
+apps/community/migrations/__init__.py                                                              0      0   100%
+apps/community/models.py                                                                         185      6    97%
+apps/community/services.py                                                                       279     40    86%
+apps/community/tests/__init__.py                                                                   0      0   100%
+apps/community/views.py                                                                          422     59    86%
+apps/core/__init__.py                                                                              0      0   100%
+apps/core/apps.py                                                                                  4      0   100%
+apps/core/audit.py                                                                                10      1    90%
+apps/core/backup.py                                                                               73      5    93%
+apps/core/config.py                                                                               26      1    96%
+apps/core/exceptions.py                                                                           35      3    91%
+apps/core/idempotency.py                                                                          39      3    92%
+apps/core/management/__init__.py                                                                   0      0   100%
+apps/core/management/commands/__init__.py                                                          0      0   100%
+apps/core/management/commands/backup_db.py                                                        10     10     0%
+apps/core/management/commands/create_first_admin.py                                               41      5    88%
+apps/core/management/commands/import_areas.py                                                     32     32     0%
+apps/core/management/commands/purge_demo.py                                                       46      7    85%
+apps/core/management/commands/restore_db.py                                                       18     18     0%
+apps/core/management/commands/seed_demo.py                                                       152      2    99%
+apps/core/management/commands/seed_reference.py                                                   16      0   100%
+apps/core/media.py                                                                                86     30    65%
+apps/core/middleware.py                                                                           13      0   100%
+apps/core/migrations/0001_initial.py                                                              10      0   100%
+apps/core/migrations/0002_audit_immutable_and_extensions.py                                        6      0   100%
+apps/core/migrations/__init__.py                                                                   0      0   100%
+apps/core/models.py                                                                               78      4    95%
+apps/core/pagination.py                                                                            4      0   100%
+apps/core/schema.py                                                                                6      0   100%
+apps/core/tests/__init__.py                                                                        0      0   100%
+apps/core/views.py                                                                               160     32    80%
+apps/finance/__init__.py                                                                           0      0   100%
+apps/finance/apps.py                                                                               4      0   100%
+apps/finance/migrations/0001_initial.py                                                            8      0   100%
+apps/finance/migrations/0002_ledger_immutable_trigger.py                                           6      0   100%
+apps/finance/migrations/0003_alter_disbursement_options_alter_payment_options_and_more.py          4      0   100%
+apps/finance/migrations/__init__.py                                                                0      0   100%
+apps/finance/models.py                                                                           125      1    99%
+apps/finance/providers.py                                                                         96     21    78%
+apps/finance/services.py                                                                         325     67    79%
+apps/finance/tasks.py                                                                              9      0   100%
+apps/finance/tests/__init__.py                                                                     0      0   100%
+apps/finance/views.py                                                                            188     13    93%
+apps/geo/__init__.py                                                                               0      0   100%
+apps/geo/apps.py                                                                                   4      0   100%
+apps/geo/migrations/0001_initial.py                                                                7      0   100%
+apps/geo/migrations/0002_alter_city_options_alter_landmark_options.py                              4      0   100%
+apps/geo/migrations/__init__.py                                                                    0      0   100%
+apps/geo/models.py                                                                                38      3    92%
+apps/geo/tests/__init__.py                                                                         0      0   100%
+apps/geo/views.py                                                                                135     72    47%
+apps/inventory/__init__.py                                                                         0      0   100%
+apps/inventory/apps.py                                                                             4      0   100%
+apps/inventory/migrations/0001_initial.py                                                          7      0   100%
+apps/inventory/migrations/0002_oversubscription_guard.py                                           6      0   100%
+apps/inventory/migrations/0003_alter_reservation_options_alter_resource_options.py                 4      0   100%
+apps/inventory/migrations/__init__.py                                                              0      0   100%
+apps/inventory/models.py                                                                          46      0   100%
+apps/inventory/services.py                                                                        88     12    86%
+apps/inventory/tasks.py                                                                            5      5     0%
+apps/inventory/tests/__init__.py                                                                   0      0   100%
+apps/inventory/views.py                                                                           85     17    80%
+apps/notifications/__init__.py                                                                     0      0   100%
+apps/notifications/apps.py                                                                         4      0   100%
+apps/notifications/channels.py                                                                    45     33    27%
+apps/notifications/migrations/0001_initial.py                                                      7      0   100%
+apps/notifications/migrations/__init__.py                                                          0      0   100%
+apps/notifications/models.py                                                                      26      0   100%
+apps/notifications/services.py                                                                    23      1    96%
+apps/notifications/tasks.py                                                                       13      3    77%
+apps/notifications/tests/__init__.py                                                               0      0   100%
+apps/notifications/views.py                                                                       25      7    72%
+apps/reports/__init__.py                                                                           0      0   100%
+apps/reports/apps.py                                                                               4      0   100%
+apps/reports/migrations/0001_initial.py                                                            9      0   100%
+apps/reports/migrations/0002_alter_confirmation_options_and_more.py                                4      0   100%
+apps/reports/migrations/__init__.py                                                                0      0   100%
+apps/reports/models.py                                                                           194      2    99%
+apps/reports/priority.py                                                                          30      0   100%
+apps/reports/routing.py                                                                           63      6    90%
+apps/reports/serializers.py                                                                      142      0   100%
+apps/reports/services.py                                                                         205     40    80%
+apps/reports/tasks.py                                                                             37      3    92%
+apps/reports/tests/__init__.py                                                                     0      0   100%
+apps/reports/views.py                                                                            333    125    62%
+apps/reports/workflow.py                                                                         128     10    92%
+apps/roadnow/__init__.py                                                                           0      0   100%
+apps/roadnow/apps.py                                                                               4      0   100%
+apps/roadnow/migrations/0001_initial.py                                                            9      0   100%
+apps/roadnow/migrations/__init__.py                                                                0      0   100%
+apps/roadnow/models.py                                                                            39      0   100%
+apps/roadnow/services.py                                                                          90     13    86%
+apps/roadnow/tasks.py                                                                              5      0   100%
+apps/roadnow/tests/__init__.py                                                                     0      0   100%
+apps/roadnow/views.py                                                                             87     10    89%
+------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                           5260    892    83%
+============================= 62 passed in 35.16s ==============================
