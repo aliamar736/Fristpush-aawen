@@ -136,6 +136,7 @@ class PaymentsStatusView(APIView):
 
 class TransferProofViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [HasRole.of(*FIN)]
+    serializer_class = PaymentSerializer  # schema placeholder; responses are built by _ser()
 
     def get_queryset(self):
         st = self.request.query_params.get("status", "pending")
@@ -204,6 +205,7 @@ class DisbursementViewSet(viewsets.ReadOnlyModelViewSet):
 
 class RefundViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [HasRole.of(*FIN)]
+    serializer_class = PaymentSerializer  # schema placeholder; responses are built by _ser()
 
     def get_queryset(self):
         return Refund.objects.select_related("payment__pledge__initiative").order_by("-created_at")

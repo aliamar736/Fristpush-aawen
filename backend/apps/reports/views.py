@@ -56,6 +56,7 @@ def _staff_view(user, report):
 
 class ReportViewSet(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ReportDetailSerializer
     queryset = Report.objects.select_related("category", "area", "agency").prefetch_related("media__asset")
 
     def get_throttles(self):
@@ -351,6 +352,7 @@ class ObjectionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class FollowUpViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = ObjectionSerializer  # schema placeholder; responses are built by _ser()
     permission_classes = [HasRole.of(Role.REVIEWER, Role.COORDINATOR, Role.AMBASSADOR)]
 
     def get_queryset(self):

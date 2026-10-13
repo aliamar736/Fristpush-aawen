@@ -323,18 +323,42 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
     patch:
       operationId: admin_settings_partial_update
       description: Admin-tunable settings (road rules, routing tolerance, follow-up
         days, feature flags...).
       tags:
       - admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/admin/users/:
     get:
       operationId: admin_users_list
@@ -896,44 +920,120 @@ paths:
         use OTP).
       tags:
       - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/auth/logout:
     post:
       operationId: auth_logout_create
       tags:
       - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/auth/otp/request:
     post:
       operationId: auth_otp_request_create
       tags:
       - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/auth/otp/verify:
     post:
       operationId: auth_otp_verify_create
       tags:
       - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/auth/refresh:
     post:
       operationId: auth_refresh_create
@@ -972,7 +1072,12 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
     delete:
       operationId: auth_sessions_destroy
       description: 'Session management: list active refresh tokens (devices) and revoke
@@ -1741,7 +1846,12 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/coverage:
     get:
       operationId: coverage_retrieve
@@ -1751,7 +1861,12 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/emergency:
     get:
       operationId: emergency_retrieve
@@ -1764,7 +1879,12 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/finance/disbursements/:
     get:
       operationId: finance_disbursements_list
@@ -1882,7 +2002,12 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/finance/payments/:
     get:
       operationId: finance_payments_list
@@ -1968,29 +2093,73 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/finance/refunds/:
     get:
-      operationId: finance_refunds_retrieve
+      operationId: finance_refunds_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: أي حقل يجب استخدامه عند ترتيب النتائج.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: رقم الصفحة ضمن النتائج المقسمة.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: عدد النتائج التي يجب إرجاعها في كل صفحة.
+        schema:
+          type: integer
       tags:
       - finance
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPaymentList'
+          description: ''
     post:
       operationId: finance_refunds_create
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '201':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/refunds/{id}/:
     get:
-      operationId: finance_refunds_retrieve_2
+      operationId: finance_refunds_retrieve
       parameters:
       - in: path
         name: id
@@ -2004,7 +2173,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/refunds/{id}/approve/:
     post:
       operationId: finance_refunds_approve_create
@@ -2017,11 +2190,27 @@ paths:
         required: true
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/refunds/{id}/complete/:
     post:
       operationId: finance_refunds_complete_create
@@ -2034,11 +2223,27 @@ paths:
         required: true
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/simulator/{provider_payment_id}:
     post:
       operationId: finance_simulator_create
@@ -2052,11 +2257,30 @@ paths:
         required: true
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/finance/status:
     get:
       operationId: finance_status_retrieve
@@ -2067,20 +2291,48 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/finance/transfer-proofs/:
     get:
-      operationId: finance_transfer_proofs_retrieve
+      operationId: finance_transfer_proofs_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: أي حقل يجب استخدامه عند ترتيب النتائج.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: رقم الصفحة ضمن النتائج المقسمة.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: عدد النتائج التي يجب إرجاعها في كل صفحة.
+        schema:
+          type: integer
       tags:
       - finance
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPaymentList'
+          description: ''
   /api/v1/finance/transfer-proofs/{id}/:
     get:
-      operationId: finance_transfer_proofs_retrieve_2
+      operationId: finance_transfer_proofs_retrieve
       parameters:
       - in: path
         name: id
@@ -2094,7 +2346,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/transfer-proofs/{id}/match/:
     post:
       operationId: finance_transfer_proofs_match_create
@@ -2107,11 +2363,27 @@ paths:
         required: true
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
   /api/v1/finance/webhooks/{provider}:
     post:
       operationId: finance_webhooks_create
@@ -2125,24 +2397,66 @@ paths:
         required: true
       tags:
       - finance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/followups/:
     get:
-      operationId: followups_retrieve
+      operationId: followups_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: أي حقل يجب استخدامه عند ترتيب النتائج.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: رقم الصفحة ضمن النتائج المقسمة.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: عدد النتائج التي يجب إرجاعها في كل صفحة.
+        schema:
+          type: integer
       tags:
       - followups
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedObjectionList'
+          description: ''
   /api/v1/followups/{id}/:
     get:
-      operationId: followups_retrieve_2
+      operationId: followups_retrieve
       parameters:
       - in: path
         name: id
@@ -2155,7 +2469,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Objection'
+          description: ''
   /api/v1/followups/{id}/complete/:
     post:
       operationId: followups_complete_create
@@ -2167,11 +2485,27 @@ paths:
         required: true
       tags:
       - followups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectionRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ObjectionRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ObjectionRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Objection'
+          description: ''
   /api/v1/health:
     get:
       operationId: health_retrieve
@@ -2181,7 +2515,12 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/help-offers/:
     get:
       operationId: help_offers_list
@@ -2748,26 +3087,69 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
     patch:
       operationId: me_partial_update
       tags:
       - me
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/me/deletion:
     post:
       operationId: me_deletion_create
       tags:
       - me
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
     delete:
       operationId: me_deletion_destroy
       tags:
@@ -2782,21 +3164,59 @@ paths:
       operationId: me_devices_create
       tags:
       - me
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/me/password:
     post:
       operationId: me_password_create
       tags:
       - me
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/me/volunteer-profile:
     get:
       operationId: me_volunteer_profile_retrieve
@@ -2807,17 +3227,41 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
     put:
       operationId: me_volunteer_profile_update
       description: مهاراتي
       tags:
       - me
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/media/:
     post:
       operationId: media_create
@@ -3287,7 +3731,12 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
   /api/v1/pledges/:
     get:
       operationId: pledges_list
@@ -3637,7 +4086,26 @@ paths:
           description: ''
   /api/v1/reports/:
     get:
-      operationId: reports_retrieve
+      operationId: reports_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: أي حقل يجب استخدامه عند ترتيب النتائج.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: رقم الصفحة ضمن النتائج المقسمة.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: عدد النتائج التي يجب إرجاعها في كل صفحة.
+        schema:
+          type: integer
       tags:
       - reports
       security:
@@ -3645,19 +4113,39 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedReportDetailList'
+          description: ''
     post:
       operationId: reports_create
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '201':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/:
     get:
-      operationId: reports_retrieve_2
+      operationId: reports_retrieve
       parameters:
       - in: path
         name: id
@@ -3672,7 +4160,11 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/add-info/:
     post:
       operationId: reports_add_info_create
@@ -3685,11 +4177,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/assign/:
     post:
       operationId: reports_assign_create
@@ -3702,11 +4210,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/check/:
     post:
       operationId: reports_check_create
@@ -3719,11 +4243,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/confirm/:
     post:
       operationId: reports_confirm_create
@@ -3736,11 +4276,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/object/:
     post:
       operationId: reports_object_create
@@ -3753,11 +4309,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/proof/:
     post:
       operationId: reports_proof_create
@@ -3770,11 +4342,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/recurrence/:
     post:
       operationId: reports_recurrence_create
@@ -3787,11 +4375,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/route/:
     post:
       operationId: reports_route_create
@@ -3806,11 +4410,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/submit/:
     post:
       operationId: reports_submit_create
@@ -3823,11 +4443,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/{id}/transition/:
     post:
       operationId: reports_transition_create
@@ -3840,11 +4476,27 @@ paths:
         required: true
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/agency/:
     get:
       operationId: reports_agency_retrieve
@@ -3856,7 +4508,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/confirmed/:
     get:
       operationId: reports_confirmed_retrieve
@@ -3866,7 +4522,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/field/:
     get:
       operationId: reports_field_retrieve
@@ -3876,7 +4536,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/mine/:
     get:
       operationId: reports_mine_retrieve
@@ -3886,7 +4550,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/queue/:
     get:
       operationId: reports_queue_retrieve
@@ -3897,7 +4565,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/similar/:
     get:
       operationId: reports_similar_retrieve
@@ -3908,7 +4580,11 @@ paths:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/stats/:
     get:
       operationId: reports_stats_retrieve
@@ -3918,7 +4594,11 @@ paths:
       - jwtAuth: []
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reports/suggest-category/:
     post:
       operationId: reports_suggest_category_create
@@ -3926,12 +4606,28 @@ paths:
         manually.
       tags:
       - reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportDetailRequest'
+        required: true
       security:
       - jwtAuth: []
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDetail'
+          description: ''
   /api/v1/reservations/:
     get:
       operationId: reservations_list
@@ -5843,6 +6539,18 @@ components:
         * `review` - مراجعة الاقتراحات
         * `voting` - تصويت
         * `closed` - مغلقة
+    DangerLevelEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      type: integer
+      description: |-
+        * `0` - لا خطر
+        * `1` - إزعاج
+        * `2` - خطر محتمل
+        * `3` - خطر مباشر
     Disbursement:
       type: object
       properties:
@@ -7101,6 +7809,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proposal'
+    PaginatedReportDetailList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportDetail'
     PaginatedReservationList:
       type: object
       required:
@@ -8074,6 +8805,235 @@ components:
         * `eligible` - مؤهل للتصويت
         * `rejected` - غير مؤهل
         * `selected` - مختار
+    ReportDetail:
+      type: object
+      description: |-
+        Never exposes the reporter's identity. Description is shown only after human verification
+        and with personal data masked.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        tracking_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        category:
+          type: string
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/ReportDetailStatusEnum'
+        status_label:
+          type: string
+        lat:
+          type: number
+          format: double
+        lng:
+          type: number
+          format: double
+        area:
+          type: integer
+          nullable: true
+        area_name:
+          type: string
+        agency_name:
+          type: string
+        landmark_text:
+          type: string
+          maxLength: 160
+        description:
+          type: string
+          readOnly: true
+        observed_at:
+          type: string
+          format: date-time
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        status_changed_at:
+          type: string
+          format: date-time
+        confirmations_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        reopen_count:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        priority_score:
+          type: number
+          format: double
+        danger_level:
+          allOf:
+          - $ref: '#/components/schemas/DangerLevelEnum'
+          minimum: 0
+          maximum: 32767
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        media:
+          type: string
+          readOnly: true
+        is_demo:
+          type: boolean
+        events:
+          type: string
+          readOnly: true
+        referral:
+          type: string
+          readOnly: true
+        completion:
+          type: string
+          readOnly: true
+        actions:
+          type: string
+          readOnly: true
+        viewer:
+          type: string
+          readOnly: true
+        needs_info_question:
+          type: string
+          maxLength: 500
+        status_reason:
+          type: string
+          maxLength: 500
+        resolution_round:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        open_objections:
+          type: string
+          readOnly: true
+      required:
+      - actions
+      - category
+      - completion
+      - description
+      - events
+      - id
+      - lat
+      - lng
+      - media
+      - observed_at
+      - open_objections
+      - referral
+      - status_label
+      - viewer
+    ReportDetailRequest:
+      type: object
+      description: |-
+        Never exposes the reporter's identity. Description is shown only after human verification
+        and with personal data masked.
+      properties:
+        tracking_number:
+          type: string
+          nullable: true
+          maxLength: 20
+        status:
+          $ref: '#/components/schemas/ReportDetailStatusEnum'
+        status_label:
+          type: string
+          minLength: 1
+        lat:
+          type: number
+          format: double
+        lng:
+          type: number
+          format: double
+        area:
+          type: integer
+          nullable: true
+        area_name:
+          type: string
+          minLength: 1
+        agency_name:
+          type: string
+          minLength: 1
+        landmark_text:
+          type: string
+          maxLength: 160
+        observed_at:
+          type: string
+          format: date-time
+        submitted_at:
+          type: string
+          format: date-time
+          nullable: true
+        status_changed_at:
+          type: string
+          format: date-time
+        confirmations_count:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        reopen_count:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        priority_score:
+          type: number
+          format: double
+        danger_level:
+          allOf:
+          - $ref: '#/components/schemas/DangerLevelEnum'
+          minimum: 0
+          maximum: 32767
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_demo:
+          type: boolean
+        needs_info_question:
+          type: string
+          maxLength: 500
+        status_reason:
+          type: string
+          maxLength: 500
+        resolution_round:
+          type: integer
+          maximum: 32767
+          minimum: 0
+      required:
+      - lat
+      - lng
+      - observed_at
+      - status_label
+    ReportDetailStatusEnum:
+      enum:
+      - draft
+      - submitted
+      - under_review
+      - needs_info
+      - verified
+      - referred
+      - acknowledged
+      - in_progress
+      - waiting_resource
+      - done_pending_verification
+      - resolved
+      - disputed
+      - reopened
+      - unresolvable
+      type: string
+      description: |-
+        * `draft` - مسودة
+        * `submitted` - مقدّم
+        * `under_review` - تحت المراجعة
+        * `needs_info` - يحتاج معلومات
+        * `verified` - موثّق
+        * `referred` - محال للجهة
+        * `acknowledged` - استلام مؤكد من الجهة
+        * `in_progress` - قيد التنفيذ
+        * `waiting_resource` - بانتظار مورد أو تصريح
+        * `done_pending_verification` - إنجاز بانتظار التحقق
+        * `resolved` - محلول
+        * `disputed` - معترض عليه
+        * `reopened` - معاد فتحه
+        * `unresolvable` - تعذّر الحل
     Reservation:
       type: object
       properties:

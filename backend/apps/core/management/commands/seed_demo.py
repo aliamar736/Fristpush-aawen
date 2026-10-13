@@ -45,7 +45,7 @@ class Command(BaseCommand):
     help = "Seed clearly-labelled demo data (never in production)."
 
     def handle(self, *a, **o):
-        if not settings.DEMO_DATA_ALLOWED:
+        if settings.IS_PRODUCTION or not settings.DEMO_DATA_ALLOWED:
             raise CommandError("بيانات العرض غير مسموحة في هذه البيئة (DEMO_DATA_ALLOWED=false).")
         call_command("seed_reference")
         with transaction.atomic():

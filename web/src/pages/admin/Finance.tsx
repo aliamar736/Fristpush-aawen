@@ -23,7 +23,7 @@ export default function Finance() {
     <div>
       <PageHeader title={tr("المساهمات والصرف", "Contributions & spending")} />
       <div className={`banner ${config?.payments.accepting_real_money ? "ok" : "warn"}`} style={{ marginBottom: 12 }}>
-        <Icon name="shield" size={20} /><span>{tr("وضع الدفع", "Payment mode")}: <b>{config?.payments.mode}</b> — {config?.payments.message}
+        <Icon name="shield" size={20} /><span>{tr("وضع الدفع", "Payment mode")}: <b>{({ simulated: tr("محاكاة", "Simulated"), disabled: tr("معطّل", "Disabled"), live: tr("حقيقي", "Live") } as Record<string, string>)[config?.payments.mode ?? ""] ?? config?.payments.mode}</b> — {config?.payments.message}
           {config?.payments.missing && ` (${tr("ينقص", "missing")}: ${config.payments.missing.join(", ")})`}</span>
       </div>
       <div className="tabs" role="tablist">{TABS.map(([k, a, e]) => <button key={k} role="tab" aria-selected={tab === k} onClick={() => setSp({ tab: k })}>{tr(a, e)}</button>)}</div>
@@ -167,7 +167,7 @@ function Ledger() {
       <div className="row between"><p className="small muted" style={{ margin: 0 }}>{tr("سجل إضافي فقط: لا يمكن تعديل أو حذف أي قيد (محمي على مستوى قاعدة البيانات).", "Append-only ledger, protected at database level.")}</p>
         <button className="btn small ghost" onClick={download}><Icon name="doc" size={18} />{tr("تصدير CSV", "Export CSV")}</button></div>
       <div className="table-wrap" style={{ marginTop: 8 }}><table className="data"><thead><tr><th>{tr("التاريخ", "Date")}</th><th>{tr("المبادرة", "Initiative")}</th><th>{tr("النوع", "Type")}</th><th>{tr("مدين/دائن", "Dr/Cr")}</th><th>{tr("المبلغ", "Amount")}</th><th>{tr("البيان", "Memo")}</th></tr></thead>
-        <tbody>{data!.map((e) => <tr key={e.id}><td>{formatDate(e.at, lang, true)}</td><td>{e.initiative}</td><td>{e.type}{e.simulated && <span className="badge demo" style={{ marginInlineStart: 4 }}>{tr("محاكي", "Sim")}</span>}</td>
+        <tbody>{data!.map((e) => <tr key={e.id}><td>{formatDate(e.at, lang, true)}</td><td>{e.initiative}</td><td>{({ collection: tr("تحصيل", "Collection"), fee: tr("رسوم", "Fee"), disbursement: tr("صرف", "Disbursement"), refund: tr("استرداد", "Refund"), adjustment: tr("تسوية", "Adjustment") } as Record<string, string>)[e.type] ?? e.type}{e.simulated && <span className="badge demo" style={{ marginInlineStart: 4 }}>{tr("محاكي", "Sim")}</span>}</td>
           <td>{e.direction === "credit" ? tr("دائن", "Cr") : tr("مدين", "Dr")}</td><td className="num">{money(e.amount, lang)}</td><td>{e.memo}</td></tr>)}</tbody></table></div>
     </>
   );

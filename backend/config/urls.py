@@ -8,6 +8,7 @@ from apps.accounts import views as acc
 from apps.agencies import views as ag
 from apps.community import views as com
 from apps.core import views as core
+from apps.core.schema import document
 from apps.finance import views as fin
 from apps.geo import views as geo
 from apps.inventory import views as inv
@@ -55,28 +56,28 @@ router.register("finance/payments", fin.PaymentAdminViewSet, basename="payments"
 router.register("notifications", notif.NotificationViewSet, basename="notifications")
 
 api = [
-    path("health", core.HealthView.as_view()),
-    path("config", core.PublicConfigView.as_view()),
-    path("admin/settings", core.SettingsView.as_view()),
-    path("auth/otp/request", acc.OTPRequestView.as_view()),
-    path("auth/otp/verify", acc.OTPVerifyView.as_view()),
-    path("auth/login", acc.PasswordLoginView.as_view()),
-    path("auth/logout", acc.LogoutView.as_view()),
-    path("auth/sessions", acc.SessionsView.as_view()),
+    path("health", document(core.HealthView).as_view()),
+    path("config", document(core.PublicConfigView).as_view()),
+    path("admin/settings", document(core.SettingsView).as_view()),
+    path("auth/otp/request", document(acc.OTPRequestView).as_view()),
+    path("auth/otp/verify", document(acc.OTPVerifyView).as_view()),
+    path("auth/login", document(acc.PasswordLoginView).as_view()),
+    path("auth/logout", document(acc.LogoutView).as_view()),
+    path("auth/sessions", document(acc.SessionsView).as_view()),
     path("auth/refresh", TokenRefreshView.as_view()),
-    path("me", acc.MeView.as_view()),
-    path("me/password", acc.SetPasswordView.as_view()),
-    path("me/deletion", acc.DeletionView.as_view()),
-    path("me/devices", acc.DeviceView.as_view()),
-    path("me/volunteer-profile", com.VolunteerProfileView.as_view()),
-    path("places/profile", geo.PlaceProfileView.as_view()),
-    path("emergency", road.EmergencyInfoView.as_view()),
-    path("coverage", com.CoverageView.as_view()),
-    path("finance/status", fin.PaymentsStatusView.as_view()),
-    path("finance/webhooks/<str:provider>", fin.WebhookView.as_view()),
-    path("finance/simulator/<str:provider_payment_id>", fin.SimulatorView.as_view()),
-    path("finance/ledger", fin.LedgerView.as_view()),
-    path("finance/reconciliation", fin.ReconciliationView.as_view()),
+    path("me", document(acc.MeView).as_view()),
+    path("me/password", document(acc.SetPasswordView).as_view()),
+    path("me/deletion", document(acc.DeletionView).as_view()),
+    path("me/devices", document(acc.DeviceView).as_view()),
+    path("me/volunteer-profile", document(com.VolunteerProfileView).as_view()),
+    path("places/profile", document(geo.PlaceProfileView).as_view()),
+    path("emergency", document(road.EmergencyInfoView).as_view()),
+    path("coverage", document(com.CoverageView).as_view()),
+    path("finance/status", document(fin.PaymentsStatusView).as_view()),
+    path("finance/webhooks/<str:provider>", document(fin.WebhookView).as_view()),
+    path("finance/simulator/<str:provider_payment_id>", document(fin.SimulatorView).as_view()),
+    path("finance/ledger", document(fin.LedgerView).as_view()),
+    path("finance/reconciliation", document(fin.ReconciliationView).as_view()),
     path("schema", SpectacularAPIView.as_view(), name="schema"),
     path("docs", SpectacularSwaggerView.as_view(url_name="schema")),
     path("", include(router.urls)),

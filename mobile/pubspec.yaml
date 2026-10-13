@@ -1,0 +1,58 @@
+name: aawen
+description: "عاون — مع بعض نعاونوا. Libyan community participation app (Android & iOS)."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  http: ^1.2.2
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.3.2
+  path_provider: ^2.1.4
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  geolocator: ^13.0.1
+  image_picker: ^1.1.2
+  flutter_image_compress: ^2.3.0
+  record: ^5.1.2
+  connectivity_plus: ^6.0.5
+  uuid: ^4.5.1
+  flutter_svg: ^2.0.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/brand/
+  fonts:
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
+          weight: 700
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/brand/app-icon.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#123F46"
+  adaptive_icon_foreground: "assets/brand/app-icon.png"
