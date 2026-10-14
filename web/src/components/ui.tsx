@@ -136,16 +136,21 @@ export function Field({ label, hint, error, children, id }: { label: string; hin
 
 export function Dialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  // Keep the latest onClose without re-running the focus effect: callers pass inline arrows, and re-running it on
+  // every render used to pull focus out of the field being typed in (and onto the close button).
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
-    ref.current?.querySelector<HTMLElement>("input,textarea,select,button")?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const body = ref.current?.querySelector<HTMLElement>(".dialog-body");
+    (body?.querySelector<HTMLElement>("input,textarea,select,button") ?? ref.current?.querySelector<HTMLElement>("button"))?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeRef.current();
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
       prev?.focus();
     };
-  }, [onClose]);
+  }, []);
   return (
     <div className="dialog-backdrop" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title" ref={ref}>
@@ -153,7 +158,7 @@ export function Dialog({ title, onClose, children }: { title: string; onClose: (
           <h2 id="dlg-title" style={{ margin: 0 }}>{title}</h2>
           <button className="icon-btn" onClick={onClose} aria-label="إغلاق"><Icon name="x" /></button>
         </div>
-        {children}
+        <div className="dialog-body">{children}</div>
       </div>
     </div>
   );

@@ -13,3 +13,4 @@ mobile/.dart_tool/
 mobile/build/
 .env
 *.dump
+docs/walkthrough/scenes/
