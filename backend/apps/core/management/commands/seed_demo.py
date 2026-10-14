@@ -254,13 +254,23 @@ class Command(BaseCommand):
 
 
 def _demo_jpeg():
+    """Illustrative (generated) 'after repair' street image used as demo completion proof."""
     import io
+    import random
 
-    from PIL import Image, ImageDraw
-    im = Image.new("RGB", (640, 400), (246, 243, 236))
+    from PIL import Image, ImageDraw, ImageFilter
+    r = random.Random(5)
+    im = Image.new("RGB", (1200, 900), (196, 214, 226))
     d = ImageDraw.Draw(im)
-    d.rectangle((40, 40, 600, 360), outline=(18, 63, 70), width=6)
-    d.text((60, 60), "AAWEN DEMO IMAGE", fill=(18, 63, 70))
+    d.polygon([(0, 900), (480, 260), (720, 260), (1200, 900)], fill=(70, 72, 74))
+    for _ in range(3000):
+        x, y = r.randint(0, 1199), r.randint(260, 899)
+        c = r.randint(60, 90)
+        d.point((x, y), fill=(c, c, c))
+    for y in range(300, 900, 90):
+        d.rectangle((594, y, 606, y + 45), fill=(240, 236, 222))
+    d.rectangle((0, 240, 1200, 265), fill=(210, 200, 180))
+    d.text((20, 20), "AAWEN DEMO", fill=(18, 63, 70))
     buf = io.BytesIO()
-    im.save(buf, "JPEG")
+    im.filter(ImageFilter.GaussianBlur(1)).save(buf, "JPEG", quality=85)
     return buf.getvalue()

@@ -26,10 +26,17 @@ export const STATUS_LABEL: Record<string, [string, string]> = {
   done_pending_verification: ["إنجاز بانتظار التحقق", "Done, awaiting verification"], resolved: ["محلول", "Resolved"],
   disputed: ["معترض عليه", "Disputed"], reopened: ["معاد فتحه", "Reopened"], unresolvable: ["تعذّر الحل", "Could not be resolved"],
 };
+const EXTRA_LABEL: Record<string, [string, string]> = {
+  open: ["مفتوح", "Open"], partial: ["مكتمل جزئيًا", "Partly met"], met: ["مكتمل", "Met"], cancelled: ["ملغى", "Cancelled"],
+  booked: ["محجوزة", "Booked"], attended: ["حضور مؤكد", "Attended"], completed: ["منجزة", "Completed"], no_show: ["لم يحضر", "No-show"],
+  succeeded: ["مؤكدة", "Confirmed"], failed: ["فشلت", "Failed"], initiated: ["بدأت", "Started"], needs_review: ["تحتاج مراجعة", "Needs review"],
+  refunded: ["مستردة", "Refunded"], partially_refunded: ["مستردة جزئيًا", "Partly refunded"], approved: ["معتمد", "Approved"],
+  rejected: ["مرفوض", "Rejected"], requested: ["مطلوب", "Requested"], eligible: ["مؤهل", "Eligible"], pending_review: ["بانتظار المراجعة", "Pending review"],
+};
 
 export function StatusBadge({ status, label }: { status: string; label?: string }) {
   const { tr } = useI18n();
-  const l = STATUS_LABEL[status];
+  const l = STATUS_LABEL[status] ?? EXTRA_LABEL[status];
   return <span className={`badge ${STATUS_TONE[status] ?? ""}`}>{label ?? (l ? tr(l[0], l[1]) : status)}</span>;
 }
 

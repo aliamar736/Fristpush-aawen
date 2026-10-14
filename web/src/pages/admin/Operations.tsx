@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { get, patch, post } from "../../api/client";
 import type { Initiative, Paged, Report } from "../../api/types";
 import { useAuth } from "../../auth/AuthContext";
+import { AuthAudio, AuthImg } from "../../components/AuthMedia";
 import { PageHeader } from "../../components/Shell";
 import { DemoBadge, Dialog, EmptyState, ErrorState, Field, Loading, StatusBadge, useAction } from "../../components/ui";
 import { formatDate, num, timeAgo } from "../../lib/format";
@@ -133,11 +134,11 @@ function BlurTool({ m, onDone }: { m: Media; onDone: () => void }) {
             onPointerUp={(e) => { const s = start.current; start.current = null; if (!s) return; const p = rel(e);
               const box = { x: Math.min(s.x, p.x), y: Math.min(s.y, p.y), w: Math.abs(p.x - s.x), h: Math.abs(p.y - s.y) };
               if (box.w > 0.01 && box.h > 0.01) setBoxes((b) => [...b, box]); }}>
-            <img src={`${m.url}?original=1`} alt={tr("وسائط بانتظار المراجعة", "Media awaiting review")} draggable={false} />
+            <AuthImg src={`${m.url}?original=1`} alt={tr("وسائط بانتظار المراجعة", "Media awaiting review")} draggable={false} />
             {boxes.map((b, i) => <div key={i} className="box" style={{ left: `${b.x * 100}%`, top: `${b.y * 100}%`, width: `${b.w * 100}%`, height: `${b.h * 100}%` }} />)}
           </div>
         </>
-      ) : <audio controls src={`${m.url}?original=1`} />}
+      ) : <AuthAudio src={`${m.url}?original=1`} />}
       <div className="row" style={{ marginTop: 8 }}>
         {boxes.length > 0 && <button className="btn small teal" disabled={busy} onClick={() => decide("blur")}>{tr(`اطمس ${boxes.length} منطقة وانشر`, `Blur ${boxes.length} & publish`)}</button>}
         {boxes.length > 0 && <button className="btn small ghost" onClick={() => setBoxes([])}>{tr("مسح التحديد", "Clear")}</button>}

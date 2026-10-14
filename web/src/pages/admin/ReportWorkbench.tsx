@@ -5,6 +5,7 @@ import { get, post, uploadMedia } from "../../api/client";
 import type { Paged, Report } from "../../api/types";
 import { useAuth } from "../../auth/AuthContext";
 import { Icon } from "../../components/Icon";
+import { AuthAudio, AuthImg } from "../../components/AuthMedia";
 import { MapView } from "../../components/MapView";
 import { PageHeader } from "../../components/Shell";
 import { DemoBadge, Dialog, ErrorState, Field, Loading, STATUS_LABEL, StatusBadge, useAction } from "../../components/ui";
@@ -117,8 +118,8 @@ export default function ReportWorkbench() {
             {(r.all_media?.length ?? 0) === 0 ? <p className="muted small">{tr("لا وسائط", "None")}</p> : (
               <div className="photo-grid">{r.all_media!.map((m) => (
                 <figure key={m.uid} style={{ margin: 0 }}>
-                  {m.kind === "image" ? <a href={`${m.url}?original=1`} target="_blank" rel="noreferrer"><img src={`${m.url}?original=1`} alt={m.role} /></a>
-                    : <audio controls src={m.url} style={{ width: "100%" }} />}
+                  {m.kind === "image" ? <AuthImg src={`${m.url}?original=1`} alt={m.role} />
+                    : <AuthAudio src={`${m.url}?original=1`} />}
                   <figcaption className="xs muted">{m.role} — {m.status === "approved" ? tr("منشور", "public") : m.status === "rejected" ? tr("مرفوض", "rejected") : tr("بانتظار المراجعة", "pending")}</figcaption>
                 </figure>))}</div>
             )}

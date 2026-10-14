@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { post, tokens, uploadMedia } from "../../api/client";
 import type { Initiative, Paged, Payment } from "../../api/types";
 import { useAuth } from "../../auth/AuthContext";
+import { openAuthFile } from "../../components/AuthMedia";
 import { Icon } from "../../components/Icon";
 import { PageHeader } from "../../components/Shell";
 import { Dialog, EmptyState, ErrorState, Field, Loading, StatusBadge, useAction } from "../../components/ui";
@@ -52,7 +53,7 @@ function Transfers() {
       {data!.length === 0 ? <EmptyState icon="check" title={tr("لا إثباتات بانتظار المطابقة", "Nothing to match")} /> : (
         <div className="table-wrap"><table className="data"><thead><tr><th>{tr("المبادرة", "Initiative")}</th><th>{tr("المبلغ المتعهد", "Pledged")}</th><th>{tr("المرجع المذكور", "Claimed ref")}</th><th>{tr("الإيصال", "Receipt")}</th><th /></tr></thead>
           <tbody>{data!.map((t) => <tr key={t.id}><td>{t.initiative}<div className="xs muted">{formatDate(t.created_at, lang, true)}</div></td><td className="num">{money(t.amount, lang)}</td><td dir="ltr">{t.claimed_reference || "—"}</td>
-            <td><a href={t.image} target="_blank" rel="noreferrer">{tr("عرض", "View")}</a></td>
+            <td><button className="btn small ghost" onClick={() => openAuthFile(t.image)}>{tr("عرض", "View")}</button></td>
             <td>{hasRole("accountant") && <button className="btn small" onClick={() => { setSel(t.id); setF({ bank_reference: t.claimed_reference, amount: t.amount, note: "" }); }}>{tr("طابق", "Match")}</button>}</td></tr>)}</tbody></table></div>
       )}
       {sel && (
