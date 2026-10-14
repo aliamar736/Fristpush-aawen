@@ -14,3 +14,4 @@ mobile/build/
 .env
 *.dump
 docs/walkthrough/scenes/
+dump.rdb
