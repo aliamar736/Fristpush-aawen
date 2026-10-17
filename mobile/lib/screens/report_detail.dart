@@ -78,26 +78,28 @@ class _ReportDetailState extends State<ReportDetail> {
             StatusPath(events: (r['events'] as List?) ?? [], status: status),
             const Divider(),
             if (viewer['is_owner'] != true && ['submitted', 'under_review', 'verified', 'referred', 'acknowledged', 'in_progress', 'reopened'].contains(status) && viewer['confirmed'] != true)
-              FilledButton(onPressed: () async { if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/confirm/'), tr(context, 'سُجّل تأكيدك', 'Confirmed')); },
+              FilledButton(onPressed: () async { final ok = tr(context, 'سُجّل تأكيدك', 'Confirmed'); if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/confirm/'), ok); },
                   child: Text(tr(context, 'المشكلة موجودة، أؤكدها', 'I see it too'))),
             if (status == 'done_pending_verification' && viewer['is_executor'] != true && viewer['checked'] != true)
               Wrap(spacing: 8, children: [
-                FilledButton(onPressed: () async { if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/check/', {'verdict': 'fixed'}), tr(context, 'شكرًا', 'Thanks')); },
+                FilledButton(onPressed: () async { final ok = tr(context, 'شكرًا', 'Thanks'); if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/check/', {'verdict': 'fixed'}), ok); },
                     child: Text(tr(context, 'تأكدت: اتصلحت', 'Verified fixed'))),
-                OutlinedButton(onPressed: () async { if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/check/', {'verdict': 'not_fixed'}), tr(context, 'شكرًا', 'Thanks')); },
+                OutlinedButton(onPressed: () async { final ok = tr(context, 'شكرًا', 'Thanks'); if (await LoginScreen.ensure(context)) _act(() => Api.instance.post('/reports/${widget.id}/check/', {'verdict': 'not_fixed'}), ok); },
                     child: Text(tr(context, 'لم تُصلح', 'Not fixed'))),
               ]),
             if (status == 'resolved') Wrap(spacing: 8, children: [
               OutlinedButton(onPressed: () async {
-                if (!await LoginScreen.ensure(context)) return;
-                final reason = await _ask(tr(context, 'لماذا تعترض؟', 'Why do you object?'));
-                if (reason != null && reason.isNotEmpty) _act(() => Api.instance.post('/reports/${widget.id}/object/', {'reason': reason}), tr(context, 'وصل اعتراضك', 'Objection sent'));
+                final q = tr(context, 'لماذا تعترض؟', 'Why do you object?'), ok = tr(context, 'وصل اعتراضك', 'Objection sent');
+                if (!await LoginScreen.ensure(context) || !mounted) return;
+                final reason = await _ask(q);
+                if (reason != null && reason.isNotEmpty) _act(() => Api.instance.post('/reports/${widget.id}/object/', {'reason': reason}), ok);
               }, child: Text(tr(context, 'أعترض على الإغلاق', 'Object'))),
               OutlinedButton(onPressed: () async {
-                if (!await LoginScreen.ensure(context)) return;
-                final note = await _ask(tr(context, 'ماذا رجع؟ (صورة حديثة مطلوبة)', 'What came back? (photo required)'), photo: true);
+                final q = tr(context, 'ماذا رجع؟ (صورة حديثة مطلوبة)', 'What came back? (photo required)'), ok = tr(context, 'أعيد فتح البلاغ', 'Reopened');
+                if (!await LoginScreen.ensure(context) || !mounted) return;
+                final note = await _ask(q, photo: true);
                 if (note != null && _photoUid != null) {
-                  _act(() => Api.instance.post('/reports/${widget.id}/recurrence/', {'note': note, 'media': [_photoUid]}), tr(context, 'أعيد فتح البلاغ', 'Reopened'));
+                  _act(() => Api.instance.post('/reports/${widget.id}/recurrence/', {'note': note, 'media': [_photoUid]}), ok);
                 }
               }, child: Text(tr(context, 'المشكلة رجعت', 'It came back'))),
             ]),

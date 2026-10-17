@@ -35,7 +35,7 @@ ThemeData buildTheme() {
   );
   return base.copyWith(
     appBarTheme: const AppBarTheme(backgroundColor: Brand.ivory, foregroundColor: Brand.petrol, elevation: 0, centerTitle: false),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: const BorderSide(color: Brand.line)),

@@ -52,10 +52,10 @@ class _RoadAlertNewState extends State<RoadAlertNew> {
             try {
               final r = await Api.instance.post('/road-alerts/', {'type': type, 'lat': pos!.latitude, 'lng': pos!.longitude,
                 'description': desc.text, 'observed_at': DateTime.now().toUtc().toIso8601String(), 'client_id': clientId}, clientId) as Map;
-              if (mounted) Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => RoadAlertDetail(id: r['id'] as int)));
+              if (context.mounted) Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => RoadAlertDetail(id: r['id'] as int)));
             } catch (e) {
-              if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-              setState(() => busy = false);
+              if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+              if (mounted) setState(() => busy = false);
             }
           }, child: Text(tr(context, 'انشر التنبيه', 'Post alert'))),
         ]),

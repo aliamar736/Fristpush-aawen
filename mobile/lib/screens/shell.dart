@@ -22,7 +22,7 @@ class _ShellState extends State<Shell> {
   int _i = 0;
   @override
   Widget build(BuildContext context) {
-    final pages = const [HomeTab(), MapTab(), AawenTab(), ContributeTab(), ImpactTab()];
+    const pages = [HomeTab(), MapTab(), AawenTab(), ContributeTab(), ImpactTab()];
     return Scaffold(
       appBar: AppBar(
         title: const BrandLogo(),

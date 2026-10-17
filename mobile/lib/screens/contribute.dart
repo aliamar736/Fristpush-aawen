@@ -52,9 +52,10 @@ class ContributeTab extends StatelessWidget {
             trailing: n['kind'] == 'funding'
                 ? FilledButton(onPressed: () => _pledge(context, i, n), child: Text(tr(context, 'ساهم', 'Give')))
                 : OutlinedButton(onPressed: () async {
+                    final offer = tr(context, 'أقدر أوفر هذا', 'I can provide this'), sent = tr(context, 'وصل عرضك', 'Offer sent');
                     if (!await LoginScreen.ensure(context)) return;
-                    await Api.instance.post('/needs/${n['id']}/offer/', {'message': tr(context, 'أقدر أوفر هذا', 'I can provide this')});
-                    if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(tr(context, 'وصل عرضك', 'Offer sent'))));
+                    await Api.instance.post('/needs/${n['id']}/offer/', {'message': offer});
+                    if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(sent)));
                   }, child: Text(tr(context, 'عندي', 'I have it'))),
           )),
         ]);

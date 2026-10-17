@@ -74,7 +74,8 @@ class _HomeTabState extends State<HomeTab> {
               style: const TextStyle(color: Brand.ivory, fontSize: 28, fontWeight: FontWeight.w700)),
           const SizedBox(height: 12),
           DropdownButtonFormField<int>(
-            value: _area,
+            key: ValueKey(_area),
+            initialValue: _area,
             decoration: InputDecoration(labelText: tr(context, 'المنطقة المتابعة', 'Followed area')),
             items: _areas.map((a) => DropdownMenuItem(value: a['id'] as int, child: Text(a['name_ar'] as String))).toList(),
             onChanged: _setArea,
