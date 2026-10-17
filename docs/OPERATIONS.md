@@ -1,5 +1,16 @@
 # دليل التشغيل والنشر والصيانة — عاون
 
+## 0. خادم عرض بأمر واحد (Ubuntu 24.04)
+على خادم جديد (VPS) بنظام Ubuntu 24.04 وذاكرة 4 غيغابايت على الأقل:
+```bash
+curl -fsSL https://raw.githubusercontent.com/aliamar736/Fristpush-aawen/main/scripts/install-server.sh | sudo bash -s -- --domain demo.example.ly
+```
+- يثبّت PostgreSQL+PostGIS وRedis وCaddy (HTTPS تلقائي عند إعطاء نطاق يشير إلى عنوان الخادم)، يبني الويب، يحمّل بيانات العرض، ويشغّل الخدمات (systemd).
+- بدون `--domain` يعمل على عنوان IP عبر HTTP (زر «موقعي الحالي» يحتاج HTTPS).
+- إعادة تشغيل الأمر نفسه تحدّث الكود. الإعدادات في `/etc/aawen/backend.env`.
+- هذا خادم **عرض**: بيانات «تجريبي»، رمز الدخول يظهر على الشاشة، دفع بمحاكٍ. للإنتاج راجع §4.
+- اختُبر السكربت كاملًا على Ubuntu 24.04 ثم نجحت عليه اختبارات E2E (22/22).
+
 ## 1. التشغيل المحلي (دون Docker — الطريقة التي اختُبر بها المشروع)
 المتطلبات: Python 3.12+، PostgreSQL 16 + PostGIS 3.4، Redis 7، Node 22، مكتبات GDAL/GEOS/PROJ.
 
