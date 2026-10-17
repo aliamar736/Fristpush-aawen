@@ -1,0 +1,56 @@
+name: Build Android app
+
+# Builds an installable APK of the AAWEN mobile app.
+# Run it from GitHub: Actions → "Build Android app" → Run workflow → enter your server address.
+on:
+  workflow_dispatch:
+    inputs:
+      server:
+        description: "Server address, e.g. http://203.0.113.10 or https://demo.example.ly"
+        required: true
+        default: "http://203.0.113.10"
+  push:
+    branches: [main]
+    paths: ["mobile/**", ".github/workflows/android.yml"]
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: mobile
+    env:
+      SERVER: ${{ github.event.inputs.server || 'http://203.0.113.10' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: "3.24.5"
+          cache: true
+
+      - name: Generate the Android project files
+        run: flutter create --org ly.aawen --project-name aawen --platforms=android .
+      - name: Permissions and app name
+        run: python3 tool/prepare_android.py --allow-http
+      - run: flutter pub get
+      - name: App icon
+        run: dart run flutter_launcher_icons
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - name: Unit tests
+        run: flutter test
+      - name: Build APK
+        run: flutter build apk --release --dart-define=AAWEN_API=${SERVER%/}/api/v1
+      - name: Name the file
+        run: cp build/app/outputs/flutter-apk/app-release.apk build/aawen-demo.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aawen-android-apk
+          path: mobile/build/aawen-demo.apk
+          retention-days: 30
