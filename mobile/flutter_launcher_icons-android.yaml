@@ -1,0 +1,7 @@
+# Android-only icon config used by the Android CI build (the iOS project is not generated there).
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/brand/app-icon.png"
+  adaptive_icon_background: "#123F46"
+  adaptive_icon_foreground: "assets/brand/app-icon.png"

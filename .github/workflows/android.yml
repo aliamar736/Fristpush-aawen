@@ -41,7 +41,7 @@ jobs:
       - name: Packages
         run: tool/ci_step.sh pub flutter pub get
       - name: App icon
-        run: tool/ci_step.sh icons dart run flutter_launcher_icons
+        run: tool/ci_step.sh icons dart run flutter_launcher_icons -f flutter_launcher_icons-android.yaml
       - name: Analyze
         run: tool/ci_step.sh analyze flutter analyze --no-fatal-infos --no-fatal-warnings
       - name: Unit tests
