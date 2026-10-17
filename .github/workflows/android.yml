@@ -31,11 +31,12 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: "3.24.5"
           cache: true
 
       - name: Generate the Android project files
         run: tool/ci_step.sh create flutter create --org ly.aawen --project-name aawen --platforms=android .
+      - name: Remove the template test that flutter create adds
+        run: grep -q "MyApp" test/widget_test.dart 2>/dev/null && rm test/widget_test.dart || true
       - name: Permissions and app name
         run: python3 tool/prepare_android.py --allow-http
       - name: Packages
