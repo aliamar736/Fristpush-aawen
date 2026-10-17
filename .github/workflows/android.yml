@@ -23,8 +23,8 @@ jobs:
     env:
       SERVER: ${{ github.event.inputs.server || 'http://203.0.113.10' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
@@ -35,18 +35,19 @@ jobs:
           cache: true
 
       - name: Generate the Android project files
-        run: flutter create --org ly.aawen --project-name aawen --platforms=android .
+        run: tool/ci_step.sh create flutter create --org ly.aawen --project-name aawen --platforms=android .
       - name: Permissions and app name
         run: python3 tool/prepare_android.py --allow-http
-      - run: flutter pub get
+      - name: Packages
+        run: tool/ci_step.sh pub flutter pub get
       - name: App icon
-        run: dart run flutter_launcher_icons
+        run: tool/ci_step.sh icons dart run flutter_launcher_icons
       - name: Analyze
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        run: tool/ci_step.sh analyze flutter analyze --no-fatal-infos --no-fatal-warnings
       - name: Unit tests
-        run: flutter test
+        run: tool/ci_step.sh test flutter test
       - name: Build APK
-        run: flutter build apk --release --dart-define=AAWEN_API=${SERVER%/}/api/v1
+        run: tool/ci_step.sh build flutter build apk --release --dart-define=AAWEN_API=${SERVER%/}/api/v1
       - name: Name the file
         run: cp build/app/outputs/flutter-apk/app-release.apk build/aawen-demo.apk
       - uses: actions/upload-artifact@v4
